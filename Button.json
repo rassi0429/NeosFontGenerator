@@ -147,7 +147,7 @@
                         "Pressed": {
                             "ID": "022dca68-1466-4764-94f3-a22d1cc1aa55",
                             "Data": {
-                                "Target": null,
+                                "Target": "a712a8b2-ee14-4639-bd13-b88b40ca7137",
                                 "Method": "OnImportFile"
                             }
                         },
