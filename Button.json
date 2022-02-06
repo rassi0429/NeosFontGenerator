@@ -1064,7 +1064,7 @@
                                 },
                                 "URL": {
                                     "ID": "ef12388c-67ba-4293-87a1-b86744212385",
-                                    "Data": "@http://test.local/"
+                                    "Data": "@https://genfont.neos.love/REPLACE_HERE/NeosFont.ttf"
                                 }
                             }
                         },

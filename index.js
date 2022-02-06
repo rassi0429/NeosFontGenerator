@@ -13,11 +13,12 @@ const {info, error} = require("./logger")
 
 
 app.use(express.static('./ttf'))
-app.get("/", (req, res) => {
-  res.send(JSON.stringify(buttonTemplate))
+app.get("/button.json", (req, res) => {
+  const query = (req.query.url).replace(".", "/")
+  res.send(JSON.stringify(buttonTemplate).replace("REPLACE_HERE", query))
 })
 
-const server = app.listen(3003, function () {
+const server = app.listen(4000, function () {
   info("ok port:" + server.address().port)
 });
 
@@ -127,7 +128,7 @@ neos.on("messageReceived", async (msg) => {
       await sleep(1000)
       info("Download: OK")
       await generate(userId, tmpId)
-      sendObjectMessage(neos, msg.SenderId, "https://genfont.neos.love", "https://pbs.twimg.com/profile_images/1450547758067113984/QRs6uWRA_400x400.jpg")
+      sendObjectMessage(neos, msg.SenderId, `https://genfont.neos.love/button.json?url=${userId}.${tmpId}`, "https://pbs.twimg.com/profile_images/1450547758067113984/QRs6uWRA_400x400.jpg")
 
     }
   } catch (e) {
