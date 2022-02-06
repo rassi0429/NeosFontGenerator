@@ -1,0 +1,36 @@
+{
+    "props": {
+      "ascent": 96,
+      "descent": 32,
+      "em": 128,
+      "encoding": "UnicodeFull",
+      "lang": "English (US)",
+      "family": "Example",
+      "style": "Regular",
+      "familyname": "NeosJson",
+      "fontname": "Example-Regular",
+      "fullname": "Example Regular"
+    },
+    "glyphs": {
+      "0x61": {
+        "src": "../svg/61.svg"
+      }
+    },
+    "sfnt_names": [
+      [
+        "English (US)",
+        "Copyright",
+        "Copyright (c) 2022 by koko"
+      ],
+      [
+        "English (US)",
+        "Family",
+        "NeosFont"
+      ]
+    ],
+    "input": ".",
+    "output": [
+      "./example.ttf"
+    ],
+    "# vim: set et sw=2 ts=2 sts=2:": false
+  }
