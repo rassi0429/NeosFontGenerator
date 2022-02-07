@@ -30,13 +30,15 @@ async function getFiles(userId, tmpId) {
 async function generate(userId, tmpId) {
   // const tmpId = userId // + Math.random().toString(32).substring(2)
   const files = await getFiles(userId, tmpId)
+  const heights = []
   for (const file of files) {
     const image = sharp(`./image/${userId}/${tmpId}/${file}`)
-    image.trim()
+    const metadata = await image.metadata()
+    heights.push(metadata.width)
     await image.toFile(`./trimed/${userId}/${tmpId}/${file}`)
     await trace(`./trimed/${userId}/${tmpId}/${file}`, `./svg/${userId}/${tmpId}/${file.split(".")[0]}.svg`)
   }
-  PythonShell.run("./python/convert.py", {args: [JSON.stringify(generateConfig(files, tmpId, userId))]}, function (err, output) {
+  PythonShell.run("./python/convert.py", {args: [JSON.stringify(generateConfig(files, heights, tmpId, userId))]}, function (err, output) {
     if (err) throw err
     info("Font Generate OK")
   })
@@ -53,12 +55,14 @@ function trace(inFile, outFile) {
 }
 
 
-function generateConfig(files, tmpId, userId, fontName = "NeosFont") {
+function generateConfig(files, heights, tmpId, userId, fontName = "NeosFont") {
   const glyphs = {}
-  files.forEach(file => {
+  files.forEach((file, index) => {
     const name = file.split(".")[0]
     glyphs[name] = {
-      "src": `svg/${userId}/${tmpId}/${name}.svg`
+      "src": `svg/${userId}/${tmpId}/${name}.svg`,
+      "width": heights[index],
+      "height": 512
     }
   })
 
@@ -66,7 +70,7 @@ function generateConfig(files, tmpId, userId, fontName = "NeosFont") {
     "props": {
       "ascent": 96,
       "descent": 32,
-      "em": 128,
+      "em": 512,
       "encoding": "UnicodeFull",
       "lang": "English (US)",
       "family": "Example",
