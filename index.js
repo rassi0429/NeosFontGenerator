@@ -132,7 +132,7 @@ neos.on("messageReceived", async (msg) => {
       await sleep(1000)
       info("Download: OK")
       await generate(userId, tmpId)
-      sendObjectMessage(neos, msg.SenderId, `https://genfont.neos.love/button.json?url=${userId}.${tmpId}`, "https://cdn.discordapp.com/attachments/938953464447369216/948044836999667792/custom_font.png")
+      sendObjectMessage(neos, msg.SenderId, `https://genfont.neos.love/button.json?url=${userId}.${tmpId}`, "https://cdn.discordapp.com/attachments/938953464447369216/948045738225582110/custom_font2.png")
 
     }
   } catch (e) {
